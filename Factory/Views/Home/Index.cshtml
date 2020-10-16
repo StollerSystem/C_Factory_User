@@ -9,8 +9,7 @@
 <div class="homeImage">
   <h1>Deluxe Factory Manager</h1>
   <div class="row">
-    <div class="col-md-6 homeList">
-      
+    <div class="col-md-6 homeList">      
       <h2>Machines:</h2>
       <ul>
        @if (@ViewBag.machines.Count == 0)
@@ -23,7 +22,6 @@
       }
       </ul>
     </div>
-
     <div class="col-md-6 homeList">
       <h2>Engineers:</h2>
       <ul>
@@ -41,10 +39,7 @@
   <div class="row homeList">
     <div class="col-md-6">
         <p>@Html.ActionLink("Machine Manager", "Index", "Machines", null, new { @class = "btn btn-info btn-large" })</p>
-    </div>
-    @* @* <div class="col-md-4">
-      <p>@Html.ActionLink("See all appointments", "Index", "Appointments", null, new { @class = "btn btn-info btn-large" })</p>    
-    </div> *@
+    </div>    
     <div class="col-md-6">
         <p>@Html.ActionLink("Engineer", "Index", "Engineers", null, new { @class = "btn btn-info btn-large" })</p>    
     </div> 
