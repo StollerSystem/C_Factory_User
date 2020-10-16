@@ -6,7 +6,7 @@
 @model List<Factory.Models.Machine>;
 
 <div class="mainBox">
-  <h2>Machines</h2>
+  <h2>Machine Manager</h2>
   <hr />
   <h4>@ViewBag.filterName</h4>
   <div class="lists">
@@ -17,7 +17,7 @@
       } 
       @foreach (Machine machine in Model)
       {
-        <li><strong>@Html.ActionLink($"{machine.MachineName}", "Details", new { id = machine.MachineId }) </li>
+        <li><strong>@Html.ActionLink($"{machine.MachineName}", "Details", new { id = machine.MachineId }) | Status: @machine.MachineStatus</li>
       }
     </ul>
   </div>
