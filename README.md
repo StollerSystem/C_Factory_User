@@ -1,6 +1,6 @@
 # _MVC Factory_
 
-#### _An app to manage enginners and machines at a factory, 10/9/20_
+#### _An app to manage Engineers and Machines at a factory, 10/16/20_
 
 #### By _**Ben Stoller**_
 
@@ -33,7 +33,7 @@ Stretch Goals Completed:
 
 ## Setup/Installation Requirements
 
-NOTE - you can do the following to manually set up the databse for the project OR you can run the command 'dotnet ef database update' after you clone as explained below. 
+NOTE - you can do the following to manually set up the databse for the project OR you can run the command 'dotnet ef database update' after you clone as explained below in 'Website Setup'.
 
 ## MySQL Workbench Schema Setup:
 1. Open [MySql Workbench](https://www.mysql.com/products/workbench/) and connect to Local instance
@@ -41,7 +41,9 @@ NOTE - you can do the following to manually set up the databse for the project O
 3. Copy and paste the following code into "Query" and "Run":
 ---
 ### **Copy The Following Code:**
-CREATE DATABASE `ben_stoller` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE `ben_stoller`;
+USE ben_stoller;
+CREATE DATABASE `ben_stoller`;
 USE ben_stoller;
 CREATE TABLE `engineers` (
   `EngineerId` int NOT NULL AUTO_INCREMENT,
@@ -50,19 +52,13 @@ CREATE TABLE `engineers` (
   `LicenseRenewal` longtext,
   PRIMARY KEY (`EngineerId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `incidentjoins` (
-  `IncidentJoinId` int NOT NULL AUTO_INCREMENT,
-  `IncidentId` int NOT NULL DEFAULT '0',
-  `MachineId` int NOT NULL DEFAULT '0',
-  `EngineerId` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`IncidentJoinId`),
-  KEY `IX_IncidentJoins_EngineerId` (`EngineerId`),
-  KEY `IX_IncidentJoins_IncidentId` (`IncidentId`),
-  KEY `IX_IncidentJoins_MachineId` (`MachineId`),
-  CONSTRAINT `FK_IncidentJoins_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
-  CONSTRAINT `FK_IncidentJoins_Incidents_IncidentId` FOREIGN KEY (`IncidentId`) REFERENCES `incidents` (`IncidentId`) ON DELETE CASCADE,
-  CONSTRAINT `FK_IncidentJoins_Machines_MachineId` FOREIGN KEY (`MachineId`) REFERENCES `machines` (`MachineId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `machines` (
+  `MachineId` int NOT NULL AUTO_INCREMENT,
+  `MachineName` longtext,
+  `MachineStatus` longtext,
+  `InspectionDate` longtext,
+  PRIMARY KEY (`MachineId`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `incidents` (
   `IncidentId` int NOT NULL AUTO_INCREMENT,
   `IncidentTitle` longtext,
@@ -80,13 +76,19 @@ CREATE TABLE `machineengineers` (
   CONSTRAINT `FK_MachineEngineers_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
   CONSTRAINT `FK_MachineEngineers_Machines_MachineId` FOREIGN KEY (`MachineId`) REFERENCES `machines` (`MachineId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `machines` (
-  `MachineId` int NOT NULL AUTO_INCREMENT,
-  `MachineName` longtext,
-  `MachineStatus` longtext,
-  `InspectionDate` longtext,
-  PRIMARY KEY (`MachineId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `incidentjoins` (
+  `IncidentJoinId` int NOT NULL AUTO_INCREMENT,
+  `IncidentId` int NOT NULL DEFAULT '0',
+  `MachineId` int NOT NULL DEFAULT '0',
+  `EngineerId` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`IncidentJoinId`),
+  KEY `IX_IncidentJoins_EngineerId` (`EngineerId`),
+  KEY `IX_IncidentJoins_IncidentId` (`IncidentId`),
+  KEY `IX_IncidentJoins_MachineId` (`MachineId`),
+  CONSTRAINT `FK_IncidentJoins_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_IncidentJoins_Incidents_IncidentId` FOREIGN KEY (`IncidentId`) REFERENCES `incidents` (`IncidentId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_IncidentJoins_Machines_MachineId` FOREIGN KEY (`MachineId`) REFERENCES `machines` (`MachineId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 ## Website Setup:
