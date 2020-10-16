@@ -7,7 +7,7 @@
 <div class="mainBox">
   <h2>Engineer Details</h2>
   <hr />
-  <h4>Name: @Html.DisplayFor(model => model.EngineerName)</h4>
+  <h4>Name: @Html.DisplayFor(model => model.EngineerName) Status: @Html.DisplayFor(model => model.EngineerStatus)</h4>
   
   @if (@Model.Machines.Count == 0)
 {

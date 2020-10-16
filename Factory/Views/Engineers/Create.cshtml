@@ -13,10 +13,15 @@
       @Html.TextBoxFor(model => model.EngineerName, 
       new {@required="required"})
 
+      @Html.Label("Status")
+      @Html.DropDownListFor(model => model.EngineerStatus, new List<SelectListItem>
+      { new SelectListItem{Text="Actice", Value="Actice"},
+      new SelectListItem{Text="Idle", Value="Idle"},       
+      },"Please select", htmlAttributes: new{required = "Please select a stylist"})
+
      
 
-      @* @Html.LabelFor(model => model.Stylist)
-      @Html.DropDownList("StylistId", null, "Please Select", htmlAttributes: new{required = "Please select a stylist"}) *@
+      
 
       
 

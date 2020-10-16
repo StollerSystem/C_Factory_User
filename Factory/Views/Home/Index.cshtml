@@ -31,7 +31,7 @@
       } 
       @foreach (Engineer engineer in @ViewBag.engineers)
       {
-        <li><strong>@Html.ActionLink($"{engineer.EngineerName}", "Details", "engineers", new { id = engineer.EngineerId }) </li>
+        <li><strong>@Html.ActionLink($"{engineer.EngineerName}", "Details", "engineers", new { id = engineer.EngineerId }) | Status: @engineer.EngineerStatus</li>
       }
       </ul>
     </div>
