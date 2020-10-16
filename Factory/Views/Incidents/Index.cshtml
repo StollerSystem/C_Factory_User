@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model List<Factory.Models.Incident>;
+
+<div class="mainBox">
+  <h2>Incident Manager</h2>
+  <hr />
+  <h4>@ViewBag.filterName</h4>
+  <div class="lists">
+    <ul >
+      @if (@Model.Count == 0)
+      {
+        <li><strong>No Incidents found</strong></li>
+      } 
+      @foreach (Incident incident in Model)
+      {
+        <li><strong>@Html.ActionLink($"{incident.IncidentTitle}", "Details", new { id = incident.IncidentId }) | Date: @incident.IncidentDate</li>
+      }
+    </ul>
+  </div>
+  @using (Html.BeginForm())
+  {  
+    <label for="Name">Filter by incident title:</label>
+    <input type="text" id="Name" name="name" required> 
+    <input type="submit" value="Filter" class="btn btn-info btn-sm"/> 
+    @Html.ActionLink("Show all Incidents", "Index", null, null, new { @class = "btn btn-info btn-sm" })
+  }
+  <hr />
+  <p>@Html.ActionLink("Add new Incident", "Create", null, null, new { @class = "btn btn-info btn-large" })</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>
