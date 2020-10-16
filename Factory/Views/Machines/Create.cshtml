@@ -9,7 +9,7 @@
   <hr />
   @using (Html.BeginForm())
   {
-      @Html.LabelFor(model => model.MachineName)
+      @Html.Label("Machine Name")
       @Html.TextBoxFor(model => model.MachineName, 
       new {@required="required"})
 

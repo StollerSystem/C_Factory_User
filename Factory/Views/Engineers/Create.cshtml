@@ -9,7 +9,7 @@
   <hr />
   @using (Html.BeginForm())
   {
-      @Html.LabelFor(model => model.EngineerName)
+      @Html.Label("Name")
       @Html.TextBoxFor(model => model.EngineerName, 
       new {@required="required"})
 
@@ -18,13 +18,6 @@
       { new SelectListItem{Text="Actice", Value="Actice"},
       new SelectListItem{Text="Idle", Value="Idle"},       
       },"Please select", htmlAttributes: new{required = "Please select a stylist"})
-
-     
-
-      
-
-      
-
 
 
       <input type="submit" value="Create Engineer" class="btn btn-info btn-large" />

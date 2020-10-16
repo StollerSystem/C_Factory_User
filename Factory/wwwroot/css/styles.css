@@ -3,6 +3,7 @@ body, html {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color:#B1A7A6;
+  font-family: 'Jockey One', sans-serif;
 }
 
 .container {
@@ -33,6 +34,8 @@ ul#headerList {
   padding-right: 12%;
   overflow: hidden;
   background-color: #0B090A;
+  border-bottom: solid #E5383B;
+  
 }
 
 li#headerUl {
@@ -100,6 +103,7 @@ h1 {
   border: solid #E5383B;
   background-color: #D3D3D3;
   padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .lists {
