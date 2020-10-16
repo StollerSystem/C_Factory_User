@@ -13,6 +13,13 @@
       @Html.TextBoxFor(model => model.MachineName, 
       new {@required="required"})
 
+      @Html.Label("Status")
+      @Html.DropDownListFor(model => model.MachineStatus, new List<SelectListItem>
+      { new SelectListItem{Text="Operational", Value="Operational"},
+      new SelectListItem{Text="Malfunctioning", Value="Malfunctioning"}, 
+      new SelectListItem{Text="Under Repair", Value="Under Repair"},      
+      },"Please select", htmlAttributes: new{required = "Please select a stylist"})
+
      
 
       @* @Html.LabelFor(model => model.Stylist)
