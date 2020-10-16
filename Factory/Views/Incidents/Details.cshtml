@@ -2,39 +2,40 @@
   Layout = "_Layout";
 }
 
-@model Factory.Models.Machine
+@model Factory.Models.Incident
 
 <div class="mainBox">
-  <h2>Machine Details</h2>
+  <h2>Incident Details</h2>
   <hr />
-  <h3>Name: @Html.DisplayFor(model => model.MachineName)</h3>
-  <h4>Status:  @Html.DisplayFor(model => model.MachineStatus)</h4>
-  <h4>Next inspection date: @Html.DisplayFor(model => model.InspectionDate)</h4>
-@if (@Model.Engineers.Count == 0)
+  <h3>Name: @Html.DisplayFor(model => model.IncidentTitle)</h3>
+  <h4>Description:  @Html.DisplayFor(model => model.Description)</h4>
+  <h4>Incident date: @Html.DisplayFor(model => model.IncidentDate)</h4>
+
+@* @if (@Model.Engineers.Count == 0)
 {
-  <p>No engineers are assigned to this machine.</p>
+  <p>No engineers are assigned to this Incident.</p>
 }
 else
 {
   <hr />
-  <h4>Engineers assigned to this machine:</h4>
+  <h4>Engineers assigned to this Incident:</h4>
   <ul>
     @foreach (var join in Model.Engineers)
     {
-      @using (Html.BeginForm("DeleteEngineer", "Machines"))
+      @using (Html.BeginForm("DeleteEngineer", "Incidents"))
       {
       <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
-      @Html.Hidden("machineId", @join.MachineId)
+      @Html.Hidden("IncidentId", @join.IncidentId)
       @Html.Hidden("joinId", @join.MachineEngineerId)      
       }
     }
   </ul>  
-}
+} *@
   
 
   <hr />
-  <p>@Html.ActionLink("Add Licensed Engineer", "AddEngineer", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
-  <p>@Html.ActionLink("Edit Machine", "Edit", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
-  <p>@Html.ActionLink("Delete Machine", "Delete", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
-  <p>@Html.ActionLink("Back to Machine List", "Index",null, null, new { @class = "btn btn-info btn-sm" })</p>
+  @* <p>@Html.ActionLink("Add Licensed Engineer", "AddEngineer", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p> *@
+  <p>@Html.ActionLink("Edit Incident", "Edit", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
+  <p>@Html.ActionLink("Delete Incident", "Delete", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
+  <p>@Html.ActionLink("Back to Incident List", "Index",null, null, new { @class = "btn btn-info btn-sm" })</p>
 </div>
