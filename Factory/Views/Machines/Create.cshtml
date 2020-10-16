@@ -20,6 +20,10 @@
       new SelectListItem{Text="Under Repair", Value="Under Repair"},      
       },"Please select", htmlAttributes: new{required = "Please select a stylist"})
 
+      @Html.Label("Next Inspection Date")
+      @Html.TextBoxFor(model => model.InspectionDate, 
+      new {@required="required", type="date"})
+
      
 
       @* @Html.LabelFor(model => model.Stylist)

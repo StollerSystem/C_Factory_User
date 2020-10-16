@@ -8,7 +8,7 @@
   <h2>Machine Details</h2>
   <hr />
   <h4>Name: @Html.DisplayFor(model => model.MachineName) | Status:  @Html.DisplayFor(model => model.MachineStatus)</h4>
-  
+  <h4>Next inspection date: @Html.DisplayFor(model => model.InspectionDate)</h4>
 @if (@Model.Engineers.Count == 0)
 {
   <p>No engineers are assigned to this machine.</p>
