@@ -66,7 +66,7 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    // ADD ENGINEER
+    // ENGINEER
     public ActionResult AddEngineer(int id)
     {
       var thisMachine = _db.Machines.FirstOrDefault(Machines => Machines.MachineId == id);
@@ -82,6 +82,15 @@ namespace Factory.Controllers
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = Machine.MachineId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteEngineer(int machineId, int joinId)
+    {
+      var joinEntry = _db.MachineEngineers.FirstOrDefault(entry => entry.MachineEngineerId == joinId);
+      _db.MachineEngineers.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = machineId });
     }
   }
 }

@@ -9,7 +9,7 @@
   <hr />
   <h4>Name: @Html.DisplayFor(model => model.MachineName)</h4>
   
-  @if (@Model.Engineers.Count == 0)
+@if (@Model.Engineers.Count == 0)
 {
   <p>This monster is not assigned any Engineers.</p>
 }
@@ -19,10 +19,10 @@ else
   <ul>
     @foreach (var join in Model.Engineers)
     {
-      @using (Html.BeginForm("DeleteBehavior", "Monsters"))
+      @using (Html.BeginForm("DeleteEngineer", "Machines"))
       {
       <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
-      @Html.Hidden("monsterId", @join.MachineId)
+      @Html.Hidden("machineId", @join.MachineId)
       @Html.Hidden("joinId", @join.MachineEngineerId)      
       }
     }
