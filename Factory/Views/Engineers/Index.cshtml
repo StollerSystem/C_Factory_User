@@ -17,7 +17,7 @@
       } 
       @foreach (Engineer Engineer in Model)
       {
-        <li><strong>@Html.ActionLink($"{Engineer.EngineerName}", "Details", new { id = Engineer.EngineerId }) Status: @Engineer.EngineerStatus</li>
+        <li><strong>@Html.ActionLink($"{Engineer.EngineerName}", "Details", new { id = Engineer.EngineerId }) | Status: @Engineer.EngineerStatus</li>
       }
     </ul>
   </div>
@@ -28,6 +28,7 @@
     <input type="submit" value="Filter" class="btn btn-info btn-sm"/> 
     @Html.ActionLink("Show all Engineers", "Index", null, null, new { @class = "btn btn-info btn-sm" })
   }
+  <hr />
   <p>@Html.ActionLink("Add new Engineer", "Create", null, null, new { @class = "btn btn-info btn-large" })</p>
   <p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>

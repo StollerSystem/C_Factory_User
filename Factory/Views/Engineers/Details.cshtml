@@ -7,8 +7,10 @@
 <div class="mainBox">
   <h2>Engineer Details</h2>
   <hr />
-  <h4>Name: @Html.DisplayFor(model => model.EngineerName) Status: @Html.DisplayFor(model => model.EngineerStatus)</h4>
+  <h3>Name: @Html.DisplayFor(model => model.EngineerName) </h3>
+  <h4>Status: @Html.DisplayFor(model => model.EngineerStatus)</h4>
   
+  <hr />
   @if (@Model.Machines.Count == 0)
 {
   <p>This Engineer is not assigned any Machines.</p>
@@ -28,7 +30,7 @@ else
     }
   </ul>  
 }
-
+  <hr />
   <p>@Html.ActionLink("Add Machine", "AddMachine", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Edit Engineer", "Edit", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Delete Engineer", "Delete", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>

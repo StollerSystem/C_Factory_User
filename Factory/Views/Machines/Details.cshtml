@@ -7,7 +7,8 @@
 <div class="mainBox">
   <h2>Machine Details</h2>
   <hr />
-  <h4>Name: @Html.DisplayFor(model => model.MachineName) | Status:  @Html.DisplayFor(model => model.MachineStatus)</h4>
+  <h3>Name: @Html.DisplayFor(model => model.MachineName)</h3>
+  <h4>Status:  @Html.DisplayFor(model => model.MachineStatus)</h4>
   <h4>Next inspection date: @Html.DisplayFor(model => model.InspectionDate)</h4>
 @if (@Model.Engineers.Count == 0)
 {
@@ -15,7 +16,8 @@
 }
 else
 {
-  <h3>Engineers assigned to this machine:</h3>
+  <hr />
+  <h4>Engineers assigned to this machine:</h4>
   <ul>
     @foreach (var join in Model.Engineers)
     {
@@ -30,7 +32,7 @@ else
 }
   
 
-
+  <hr />
   <p>@Html.ActionLink("Add Licensed Engineer", "AddEngineer", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Edit Machine", "Edit", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Delete Machine", "Delete", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p>
