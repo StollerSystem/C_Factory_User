@@ -7,33 +7,39 @@
 <div class="homeImage">
   <h1>Deluxe Factory Manager</h1>  
 </div>
+<hr />
+<h3 class="homeList">Factory Overview</h3>
   <div class="homeListBox">
     <div class="row">
-      <div class="col-md-6 homeList">      
-        <h2>Machines:</h2>
-        <ul>
-        @if (@ViewBag.machines.Count == 0)
-        {
-          <li><strong>No Machines found</strong></li>
-        } 
-        @foreach (Machine machine in @ViewBag.machines)
-        {
-          <li><strong>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId }) | Status: @machine.MachineStatus</li>
-        }
-        </ul>
+      <div class="col-md-6 homeList"> 
+        <div class="card">
+          <h2>Machines</h2>
+          <ul>
+          @if (@ViewBag.machines.Count == 0)
+          {
+            <li><strong>No Machines found</strong></li>
+          } 
+          @foreach (Machine machine in @ViewBag.machines)
+          {
+            <li><strong>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId }) | Status: @machine.MachineStatus</li>
+          }
+          </ul>
+        </div>
       </div>
       <div class="col-md-6 homeList">
-        <h2>Engineers:</h2>
-        <ul>
-          @if (@ViewBag.engineers.Count == 0)
-        {
-          <li><strong>No Engineers found</strong></li>
-        } 
-        @foreach (Engineer engineer in @ViewBag.engineers)
-        {
-          <li><strong>@Html.ActionLink($"{engineer.EngineerName}", "Details", "engineers", new { id = engineer.EngineerId }) | Status: @engineer.EngineerStatus</li>
-        }
-        </ul>
+        <div class="card">
+          <h2>Repair Engineers</h2>
+          <ul>
+            @if (@ViewBag.engineers.Count == 0)
+          {
+            <li><strong>No Engineers found</strong></li>
+          } 
+          @foreach (Engineer engineer in @ViewBag.engineers)
+          {
+            <li><strong>@Html.ActionLink($"{engineer.EngineerName}", "Details", "engineers", new { id = engineer.EngineerId }) | Status: @engineer.EngineerStatus</li>
+          }
+          </ul>
+        </div>
       </div>    
     </div>
 
