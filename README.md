@@ -43,8 +43,6 @@ NOTE - you can do the following to manually set up the databse for the project O
 ### **Copy The Following Code:**
 CREATE DATABASE `ben_stoller`;
 USE ben_stoller;
-CREATE DATABASE `ben_stoller`;
-USE ben_stoller;
 CREATE TABLE `engineers` (
   `EngineerId` int NOT NULL AUTO_INCREMENT,
   `EngineerName` longtext,
