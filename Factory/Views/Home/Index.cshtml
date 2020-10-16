@@ -10,12 +10,13 @@
   <h1>Deluxe Factory Manager</h1>
   <div class="row">
     <div class="col-md-6 homeList">
-       @* @if (@Viewbag.machines.Count == 0)
-      {
-        <li><strong>No Machines found</strong></li>
-      }  *@
+      
       <h2>Machines:</h2>
       <ul>
+       @if (@ViewBag.machines.Count == 0)
+      {
+        <li><strong>No Machines found</strong></li>
+      } 
       @foreach (Machine machine in @ViewBag.machines)
       {
         <li><strong>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId }) </li>
@@ -26,23 +27,26 @@
     <div class="col-md-6 homeList">
       <h2>Engineers:</h2>
       <ul>
+        @if (@ViewBag.engineers.Count == 0)
+      {
+        <li><strong>No Engineers found</strong></li>
+      } 
       @foreach (Engineer engineer in @ViewBag.engineers)
       {
         <li><strong>@Html.ActionLink($"{engineer.EngineerName}", "Details", "engineers", new { id = engineer.EngineerId }) </li>
       }
       </ul>
     </div>
-
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <p>@Html.ActionLink("See all Machines", "Index", "Machines", null, new { @class = "btn btn-info btn-large" })</p>
+  <div class="row homeList">
+    <div class="col-md-6">
+        <p>@Html.ActionLink("Machine Manager", "Index", "Machines", null, new { @class = "btn btn-info btn-large" })</p>
+    </div>
+    @* @* <div class="col-md-4">
+      <p>@Html.ActionLink("See all appointments", "Index", "Appointments", null, new { @class = "btn btn-info btn-large" })</p>    
+    </div> *@
+    <div class="col-md-6">
+        <p>@Html.ActionLink("Engineer", "Index", "Engineers", null, new { @class = "btn btn-info btn-large" })</p>    
+    </div> 
   </div>
-  @* @* <div class="col-md-4">
-    <p>@Html.ActionLink("See all appointments", "Index", "Appointments", null, new { @class = "btn btn-info btn-large" })</p>    
-  </div> *@
-  <div class="col-md-4">
-    <p>@Html.ActionLink("See all Engineers", "Index", "Engineers", null, new { @class = "btn btn-info btn-large" })</p>    
-  </div> 
 </div>
