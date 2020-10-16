@@ -9,6 +9,7 @@
 This app will start you on the home page where you'll have an overview of all the machines and engineers currently added. From here you can go to manage machines, engineers or incidents. In manage machines you can view a list of all machines, add new ones and click on them to pull up the details page. From there you can see all the information as well as assign a repair engineer to the machine. 
 From the engineer manager you can add new ones and select them from the list to view details. Once in the details you can edit, delete and assign them to a machine. 
 In the incident manager you can create a new incident and then see a list of them on the index. If you click on an incindent you will be taken to the details page where you can edit, delete or assign the engineer and machine involved in the repair incident. 
+The engineer and machine detail pages will also display if they have been involved in any incidents. 
 
 ## User Stories
 * As the factory manager, I need to be able to see a list of all engineers, and I need to be able to see a list of all machines.
