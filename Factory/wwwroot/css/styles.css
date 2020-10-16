@@ -79,9 +79,9 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  padding: 100px;
-  padding-top: 200px;
-  padding-bottom: 200px;
+  padding: 5px;
+  /* padding-top: 200px;
+  padding-bottom: 200px; */
 }
 
 #footer {
