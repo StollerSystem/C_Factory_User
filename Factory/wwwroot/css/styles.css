@@ -128,3 +128,8 @@ h1 {
 a {
   color: black;
 }
+
+.homeListBox {
+  height: 300px;
+  border: solid white;
+}
