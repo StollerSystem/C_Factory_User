@@ -50,25 +50,7 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    // public ActionResult AddSpecialty(int id)
-    // {
-    //   Machine thisMachine = _db.Machines.FirstOrDefault(s => s.MachineId == id);
-    //   ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "SpecialtyType");
-    //   return View(thisMachine);
-    // }
-    // [HttpPost]
-    // public ActionResult AddSpecialty(SpecialtyMachine specialtyMachine)
-    // {
-    //   if (specialtyMachine.SpecialtyId != 0)
-    //   {
-    //     if (_db.SpecialtyMachines.Where(x => x.SpecialtyId == specialtyMachine.SpecialtyId && x.MachineId == specialtyMachine.MachineId).ToHashSet().Count == 0)
-    //     {
-    //       _db.SpecialtyMachines.Add(specialtyMachine);
-    //     }
-    //   }
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    
     public ActionResult Delete(int id)
     {
       var thisMachine = _db.Machines.FirstOrDefault(x => x.MachineId == id);
@@ -82,6 +64,24 @@ namespace Factory.Controllers
       _db.Machines.Remove(thisMachine);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    // ADD ENGINEER
+    public ActionResult AddEngineer(int id)
+    {
+      var thisMachine = _db.Machines.FirstOrDefault(Machines => Machines.MachineId == id);
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
+      return View(thisMachine);
+    }
+    [HttpPost]
+    public ActionResult AddEngineer(Machine Machine, int EngineerId)
+    {
+      if (EngineerId != 0)
+      {
+        _db.MachineEngineers.Add(new MachineEngineer() { EngineerId = EngineerId, MachineId = Machine.MachineId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = Machine.MachineId });
     }
   }
 }

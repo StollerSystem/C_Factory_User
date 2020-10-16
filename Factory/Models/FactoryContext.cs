@@ -7,6 +7,8 @@ namespace Factory.Models
     public DbSet<Machine> Machines { get; set; }
 
     public DbSet<Engineer> Engineers { get; set; }
+
+    public DbSet<MachineEngineer> MachineEngineers { get; set; }
     
     
     
