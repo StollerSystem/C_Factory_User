@@ -68,6 +68,7 @@ h1 {
  background-color: #A4161A;
  margin: 2px;
  margin-left: 0px;
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .homeImage {
@@ -81,6 +82,7 @@ h1 {
   padding: 5px;
   padding-top: 75px;
   padding-bottom: 75px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 #footer {
@@ -127,6 +129,10 @@ h1 {
 
 a {
   color: black;
+}
+
+a:hover {
+  color: rgb(0, 217, 255);
 }
 
 .homeListBox {
