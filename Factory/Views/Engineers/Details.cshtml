@@ -17,7 +17,7 @@
 }
 else
 {
-  <h3>Machines assigned to this machine:</h3>
+  <h3>Machines assigned to this engineer:</h3>
   <ul>
     @foreach (var join in Model.Machines)
     {
@@ -30,6 +30,21 @@ else
     }
   </ul>  
 }
+<hr />
+  <h4>Incidents:</h4>
+  @if (@Model.Incidents.Count == 0)
+  {
+    <p>No incidents involving this engineer.</p>
+  }
+  else
+  {  
+    <ul>
+      @foreach (var join in Model.Incidents)
+      {      
+        <li>@Html.ActionLink($"{join.Incident.IncidentTitle}", "Details", "Incidents", new { id = join.Incident.IncidentId })  </li>      
+      }
+    </ul>  
+  }
   <hr />
   <p>@Html.ActionLink("Add Machine", "AddMachine", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Edit Engineer", "Edit", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>

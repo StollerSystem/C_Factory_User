@@ -11,30 +11,32 @@
   <h4>Description:  @Html.DisplayFor(model => model.Description)</h4>
   <h4>Incident date: @Html.DisplayFor(model => model.IncidentDate)</h4>
 
-@* @if (@Model.Engineers.Count == 0)
+@if (@Model.IncidentJoin.Count == 0)
 {
-  <p>No engineers are assigned to this Incident.</p>
+  <p>No engineers or machines are assigned to this Incident.</p>
 }
 else
 {
   <hr />
   <h4>Engineers assigned to this Incident:</h4>
   <ul>
-    @foreach (var join in Model.Engineers)
-    {
-      @using (Html.BeginForm("DeleteEngineer", "Incidents"))
-      {
-      <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
-      @Html.Hidden("IncidentId", @join.IncidentId)
-      @Html.Hidden("joinId", @join.MachineEngineerId)      
-      }
+    @foreach (var join in Model.IncidentJoin)
+    {      
+      <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })</li>         
+    }    
+  </ul>
+  <h4>Machine assigned to this Incident:</h4>
+  <ul>
+    @foreach (var join in Model.IncidentJoin)
+    {      
+      <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = join.Machine.MachineId })</li>     
     }
-  </ul>  
-} *@
+  </ul> 
+}
   
 
   <hr />
-  <p>@Html.ActionLink("Link Engineer and Machine", "AddEngMach", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
+  <p>@Html.ActionLink("Assign Engineer and Machine", "AddEngMach", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
   @* <p>@Html.ActionLink("Add Licensed Engineer", "AddEngineer", null, new { id = Model.MachineId }, new { @class = "btn btn-info btn-sm" })</p> *@
   <p>@Html.ActionLink("Edit Incident", "Edit", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Delete Incident", "Delete", null, new { id = Model.IncidentId }, new { @class = "btn btn-info btn-sm" })</p>
