@@ -23,19 +23,13 @@ namespace Factory.Controllers
     }
 
     public ActionResult Create()
-    {
-      
+    {      
       return View();
     }
 
     [HttpPost]
     public ActionResult Create(Incident Incident, int EngineerId, int MachineId)
     {
-      // if (EngineerId != 0 && MachineId != 0)
-      // {
-      //   _db.IncidentJoins.Add(new IncidentJoin() { MachineId = MachineId, EngineerId = EngineerId, IncidentId = Incident.IncidentId });
-      // }
-
       _db.Incidents.Add(Incident);
       _db.SaveChanges();
       return RedirectToAction("Index");

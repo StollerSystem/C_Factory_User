@@ -20,29 +20,7 @@
       @Html.Label("Date")
       @Html.TextBoxFor(model => model.IncidentDate, 
       new {@required="required", type="date"})
-
-
-
       
-      
-
-      @* @Html.Label("Status")
-      @Html.DropDownListFor(model => model.IncidentStatus, new List<SelectListItem>
-      { new SelectListItem{Text="Operational", Value="Operational"},
-      new SelectListItem{Text="Malfunctioning", Value="Malfunctioning"}, 
-      new SelectListItem{Text="Under Repair", Value="Under Repair"},      
-      },"Please select", htmlAttributes: new{required = "Please select a stylist"}) *@
-
-
-     
-
-      @* @Html.LabelFor(model => model.Stylist)
-      @Html.DropDownList("StylistId", null, "Please Select", htmlAttributes: new{required = "Please select a stylist"}) *@
-
-      
-
-
-
       <input type="submit" value="Create Incident" class="btn btn-info btn-large" />
   }
   <hr />

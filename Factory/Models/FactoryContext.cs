@@ -12,9 +12,7 @@ namespace Factory.Models
 
     public DbSet<MachineEngineer> MachineEngineers { get; set; }
 
-    public DbSet<IncidentJoin> IncidentJoins { get; set; }
-    
-    
+    public DbSet<IncidentJoin> IncidentJoins { get; set; }    
     
     public FactoryContext(DbContextOptions options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

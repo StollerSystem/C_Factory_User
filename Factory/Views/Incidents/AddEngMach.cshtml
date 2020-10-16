@@ -12,15 +12,11 @@
       @Html.HiddenFor(model => model.IncidentId)
 
       @Html.Label("Machine")
-      @Html.DropDownList("MachineId", null, "Please Select", htmlAttributes: new{required = "Please select a Machine"}) 
-      
+      @Html.DropDownList("MachineId", null, "Please Select", htmlAttributes: new{required = "Please select a Machine"})       
 
       @Html.Label("Engineer")
-      @Html.DropDownList("EngineerId", null, "Please Select", htmlAttributes: new{required = "Please select a Engineer"})
-
-      
+      @Html.DropDownList("EngineerId", null, "Please Select", htmlAttributes: new{required = "Please select a Engineer"})      
       
       <input type="submit" value="Add" class="btn btn-info btn-large" />
-  }
-  
+  }  
 </div>
