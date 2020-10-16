@@ -92,5 +92,14 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = machineId });
     }
+
+    [HttpPost] // SEARCH
+    public ActionResult Index(string name)
+    {
+      List<Machine> model = _db.Machines.Where(x => x.MachineName.Contains(name)).ToList();      
+      List<Machine> sortedList = model.OrderBy(o => o.MachineName).ToList();
+      ViewBag.filterName = "Filtering by: "+name;
+      return View("Index", sortedList);
+    }
   }
 }
