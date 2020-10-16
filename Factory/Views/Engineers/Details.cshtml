@@ -9,8 +9,25 @@
   <hr />
   <h4>Name: @Html.DisplayFor(model => model.EngineerName)</h4>
   
-  @* <h4>Stylist Name: @Html.DisplayFor(model => model.Stylist.Name)</h4>  
-  <h4>Client: @Html.DisplayFor(model => model.Client.Name)</h4> *@
+  @if (@Model.Machines.Count == 0)
+{
+  <p>This monster is not assigned any Machines.</p>
+}
+else
+{
+  <h3>Machines assigned to this machine:</h3>
+  <ul>
+    @foreach (var join in Model.Machines)
+    {
+      @using (Html.BeginForm("DeleteBehavior", "Monsters"))
+      {
+      <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = join.Machine.MachineId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
+      @Html.Hidden("monsterId", @join.MachineId)
+      @Html.Hidden("joinId", @join.MachineEngineerId)      
+      }
+    }
+  </ul>  
+}
 
   <p>@Html.ActionLink("Add Machine", "AddMachine", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>
   <p>@Html.ActionLink("Edit Engineer", "Edit", null, new { id = Model.EngineerId }, new { @class = "btn btn-info btn-sm" })</p>
