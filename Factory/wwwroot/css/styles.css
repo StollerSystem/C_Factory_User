@@ -71,7 +71,8 @@ h1 {
 }
 
 .homeImage {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://www.texasfreshair.org/wp-content/uploads/2019/04/hairstilist.jpg");
+  
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://www.texasfreshair.org/wp-content/uploads/2019/04/hairstilist.jpg"); */
   border: solid white;
   border-width: 10px;
   background-position: center;

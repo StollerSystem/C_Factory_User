@@ -36,6 +36,20 @@ namespace Factory.Controllers
       Engineer model = _db.Engineers.FirstOrDefault(Engineer => Engineer.EngineerId == id);
       return View(model);
     }
+
+    public ActionResult Edit(int id)
+    {
+      var thisEngineer = _db.Engineers.FirstOrDefault(Engineer => Engineer.EngineerId == id);
+      return View(thisEngineer);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer Engineer)
+    {
+      _db.Entry(Engineer).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     // public ActionResult AddSpecialty(int id)
     // {
     //   Engineer thisEngineer = _db.Engineers.FirstOrDefault(s => s.EngineerId == id);

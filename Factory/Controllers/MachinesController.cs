@@ -36,6 +36,20 @@ namespace Factory.Controllers
       Machine model = _db.Machines.FirstOrDefault(Machine => Machine.MachineId == id);
       return View(model);
     }
+
+    public ActionResult Edit(int id)
+    {
+      var thisMachine = _db.Machines.FirstOrDefault(Machine => Machine.MachineId == id);
+      return View(thisMachine);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Machine Machine)
+    {
+      _db.Entry(Machine).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     // public ActionResult AddSpecialty(int id)
     // {
     //   Machine thisMachine = _db.Machines.FirstOrDefault(s => s.MachineId == id);
