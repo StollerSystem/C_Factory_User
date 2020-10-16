@@ -7,6 +7,7 @@ namespace Factory.Models
     public Engineer()
     {      
       this.Machines = new HashSet<MachineEngineer>();
+      this.Incidents = new HashSet<IncidentJoin>();
           
     }
     public int EngineerId { get; set; }
@@ -14,5 +15,6 @@ namespace Factory.Models
     public string EngineerStatus { get; set; }
     public string LicenseRenewal { get; set; }  
     public virtual ICollection<MachineEngineer> Machines { get; set; }
+    public virtual ICollection<IncidentJoin> Incidents { get; set; }
   }
 }

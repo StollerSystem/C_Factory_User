@@ -3,6 +3,7 @@ using Factory.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Factory.Controllers
 {
@@ -23,12 +24,18 @@ namespace Factory.Controllers
 
     public ActionResult Create()
     {
+      
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Incident Incident)
+    public ActionResult Create(Incident Incident, int EngineerId, int MachineId)
     {
+      // if (EngineerId != 0 && MachineId != 0)
+      // {
+      //   _db.IncidentJoins.Add(new IncidentJoin() { MachineId = MachineId, EngineerId = EngineerId, IncidentId = Incident.IncidentId });
+      // }
+
       _db.Incidents.Add(Incident);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -36,9 +43,7 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
-      Incident thisIncident = _db.Incidents
-      // .Include(Incident => Incident.Clients)
-      // .Include(Incident => Incident.Appointments)
+      Incident thisIncident = _db.Incidents      
       .FirstOrDefault(Incident => Incident.IncidentId == id);
       return View(thisIncident);
     }
@@ -79,6 +84,27 @@ namespace Factory.Controllers
       List<Incident> sortedList = model.OrderBy(o => o.IncidentTitle).ToList();
       ViewBag.filterName = "Filtering by: "+name;
       return View("Index", sortedList);
+    }
+
+    // AddEngMach
+    public ActionResult AddEngMach(int id)
+    {
+      var thisIncident = _db.Incidents.FirstOrDefault(Incidents => Incidents.IncidentId == id);
+
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
+
+      return View(thisIncident);
+    }
+    [HttpPost]
+    public ActionResult AddEngMach(Incident Incident, int EngineerId, int MachineId)
+    {
+      if (EngineerId != 0 && MachineId != 0)
+      {
+        _db.IncidentJoins.Add(new IncidentJoin() { MachineId = MachineId, EngineerId = EngineerId, IncidentId = Incident.IncidentId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = Incident.IncidentId });
     }
   }
 }

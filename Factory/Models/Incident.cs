@@ -6,8 +6,8 @@ namespace Factory.Models
   {
     public Incident()
     {      
-      this.Engineers = new HashSet<Engineer>();
-      this.Machines = new HashSet<Machine>();
+      this.IncidentJoin = new HashSet<IncidentJoin>();
+      
           
     }
     public int IncidentId { get; set; }    
@@ -15,7 +15,7 @@ namespace Factory.Models
     public string IncidentTitle { get; set; }
     public string Description { get; set; } 
     public string IncidentDate { get; set; } 
-    public virtual ICollection<Engineer> Engineers { get; set; }
-    public virtual ICollection<Machine> Machines { get; set; }
+    public virtual ICollection<IncidentJoin> IncidentJoin { get; set; }
+    
   }
 }

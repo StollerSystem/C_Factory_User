@@ -11,6 +11,8 @@ namespace Factory.Models
     public DbSet<Incident> Incidents { get; set; }
 
     public DbSet<MachineEngineer> MachineEngineers { get; set; }
+
+    public DbSet<IncidentJoin> IncidentJoins { get; set; }
     
     
     
