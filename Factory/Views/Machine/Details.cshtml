@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HairSalon.Models.Appointment
+
+<div class="mainBox">
+  <h2>Appointment Details</h2>
+  <hr />
+  <h4>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h4>
+  <h4>@Html.DisplayNameFor(model => model.Date): @Html.DisplayFor(model => model.Date)</h4>
+  <h4>@Html.DisplayNameFor(model => model.Time): @Html.DisplayFor(model => model.Time)</h4>
+  <h4>Stylist Name: @Html.DisplayFor(model => model.Stylist.Name)</h4>  
+  <h4>Client: @Html.DisplayFor(model => model.Client.Name)</h4>
+  <p>@Html.ActionLink("Edit Appointment", "Edit", null, new { id = Model.AppointmentId }, new { @class = "btn btn-info btn-sm" })</p>
+  <p>@Html.ActionLink("Delete Appointment", "Delete", null, new { id = Model.AppointmentId }, new { @class = "btn btn-info btn-sm" })</p>
+  <p>@Html.ActionLink("Back to list", "Index",null, null, new { @class = "btn btn-info btn-sm" })</p>
+</div>

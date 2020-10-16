@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models;
+@model List<HairSalon.Models.Appointment>;
+
+<div class="mainBox">
+  <h2>Appointments</h2>
+  <hr />
+  <h4>@ViewBag.filterName</h4>
+  <div class="lists">
+    <ul >
+      @if (@Model.Count == 0)
+      {
+        <li><strong>No Appointments found</strong></li>
+      } 
+      @foreach (Appointment Appointment in Model)
+      {
+        <li><strong>@Html.ActionLink($"{Appointment.Title}", "Details", new { id = Appointment.AppointmentId }) </strong>| Stylist: @Appointment.Stylist.Name | Client: @Appointment.Client.Name | @Appointment.Date | @Appointment.Time</li>
+      }
+    </ul>
+  </div>
+  @using (Html.BeginForm())
+  {  
+    <label for="Name">Filter by title:</label>
+    <input type="text" id="Name" name="title" required> 
+    <input type="submit" value="Filter" class="btn btn-info btn-sm"/> 
+    @Html.ActionLink("Show all Appointments", "Index", null, null, new { @class = "btn btn-info btn-sm" })
+  }
+  <p>@Html.ActionLink("Add new Appointment", "Create", null, null, new { @class = "btn btn-info btn-large" })</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

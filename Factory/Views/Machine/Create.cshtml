@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HairSalon.Models.Appointment
+
+<div class="mainBox">
+  <h2>Add a new appointment</h2>
+  <hr />
+  @using (Html.BeginForm())
+  {
+      @Html.LabelFor(model => model.Title)
+      @Html.TextBoxFor(model => model.Title, 
+      new {@required="required"})
+
+      @Html.LabelFor(model => model.Date)
+      @Html.TextBoxFor(model => model.Date, 
+      new {@required="required", type="date"})
+
+      @Html.LabelFor(model => model.Time)
+      @Html.TextBoxFor(model => model.Time, 
+      new {@required="required", type="time"})
+
+      @Html.LabelFor(model => model.Stylist)
+      @Html.DropDownList("StylistId", null, "Please Select", htmlAttributes: new{required = "Please select a stylist"})
+
+      @Html.LabelFor(model => model.Client)
+      @Html.DropDownList("ClientId", null, "Please Select", htmlAttributes: new{required = "Please select a Client"})
+
+
+
+      <input type="submit" value="Create Appointment" class="btn btn-info btn-large" />
+  }
+  <p>@Html.ActionLink("Show all appointments", "Index",null, null, new { @class = "btn btn-info btn-large" })</p>
+</div>

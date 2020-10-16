@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HairSalon.Models.Appointment
+
+<div class="mainBox">
+  <h2>Edit Appointment</h2>
+  <hr />
+  <h4>Edit this Appointment @Html.DisplayFor(model => model.Title)</h4>
+  @using (Html.BeginForm())
+  {
+      @Html.HiddenFor(model => model.AppointmentId)
+      @Html.LabelFor(model => model.Title)
+      @Html.TextBoxFor(model => model.Title, 
+      new {@required="required"})
+      @Html.LabelFor(model => model.Date)
+      @Html.TextBoxFor(model => model.Date, 
+      new {@required="required", type="date"})
+      @Html.LabelFor(model => model.Time)
+      @Html.TextBoxFor(model => model.Time, 
+      new {@required="required", type="time"})
+      @Html.LabelFor(model => model.Stylist)
+      @Html.DropDownList("StylistId")
+      @Html.LabelFor(model => model.Client)
+      @Html.DropDownList("ClientId")
+      <input type="submit" value="Save" />
+  }
+  <p>@Html.ActionLink("Back to list", "Index",null,null, new { @class = "btn btn-info btn-large" })</p>
+</div>
