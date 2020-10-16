@@ -11,6 +11,8 @@ namespace Factory.Models
           
     }
     public int IncidentId { get; set; }    
+
+    public string IncidentTitle { get; set; }
     public string Description { get; set; } 
     public string IncidentDate { get; set; } 
     public virtual ICollection<Engineer> Engineers { get; set; }
