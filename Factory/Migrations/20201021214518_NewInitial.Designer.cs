@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Salon.Migrations
+namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    [Migration("20201016191203_addIncidentTable")]
-    partial class addIncidentTable
+    [Migration("20201021214518_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,44 @@ namespace Salon.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Factory.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail");
+
+                    b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
 
             modelBuilder.Entity("Factory.Models.Engineer", b =>
                 {
@@ -28,13 +66,13 @@ namespace Salon.Migrations
 
                     b.Property<string>("EngineerStatus");
 
-                    b.Property<int?>("IncidentId");
-
                     b.Property<string>("LicenseRenewal");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("EngineerId");
 
-                    b.HasIndex("IncidentId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Engineers");
                 });
@@ -55,12 +93,32 @@ namespace Salon.Migrations
                     b.ToTable("Incidents");
                 });
 
+            modelBuilder.Entity("Factory.Models.IncidentJoin", b =>
+                {
+                    b.Property<int>("IncidentJoinId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EngineerId");
+
+                    b.Property<int>("IncidentId");
+
+                    b.Property<int>("MachineId");
+
+                    b.HasKey("IncidentJoinId");
+
+                    b.HasIndex("EngineerId");
+
+                    b.HasIndex("IncidentId");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("IncidentJoins");
+                });
+
             modelBuilder.Entity("Factory.Models.Machine", b =>
                 {
                     b.Property<int>("MachineId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("IncidentId");
 
                     b.Property<string>("InspectionDate");
 
@@ -69,8 +127,6 @@ namespace Salon.Migrations
                     b.Property<string>("MachineStatus");
 
                     b.HasKey("MachineId");
-
-                    b.HasIndex("IncidentId");
 
                     b.ToTable("Machines");
                 });
@@ -95,16 +151,27 @@ namespace Salon.Migrations
 
             modelBuilder.Entity("Factory.Models.Engineer", b =>
                 {
-                    b.HasOne("Factory.Models.Incident")
-                        .WithMany("Engineers")
-                        .HasForeignKey("IncidentId");
+                    b.HasOne("Factory.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Factory.Models.Machine", b =>
+            modelBuilder.Entity("Factory.Models.IncidentJoin", b =>
                 {
-                    b.HasOne("Factory.Models.Incident")
-                        .WithMany("Machines")
-                        .HasForeignKey("IncidentId");
+                    b.HasOne("Factory.Models.Engineer", "Engineer")
+                        .WithMany("Incidents")
+                        .HasForeignKey("EngineerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Factory.Models.Incident", "Incident")
+                        .WithMany("IncidentJoin")
+                        .HasForeignKey("IncidentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Factory.Models.Machine", "Machine")
+                        .WithMany("Incidents")
+                        .HasForeignKey("MachineId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Factory.Models.MachineEngineer", b =>
