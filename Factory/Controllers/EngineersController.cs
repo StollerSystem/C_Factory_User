@@ -5,32 +5,57 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
+// /new using directives
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Factory.Controllers
 {
+  [Authorize] //new line
   public class EngineersController : Controller
   {
     private readonly FactoryContext _db;
-    public EngineersController(FactoryContext db)
+    private readonly UserManager<ApplicationUser> _userManager; //new line
+    public EngineersController(UserManager<ApplicationUser> userManager, FactoryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Engineer> model = _db.Engineers.OrderBy(x => x.EngineerName).ToList();
-      return View(model);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userEngineers = _db.Engineers.Where(entry => entry.User.Id == currentUser.Id);
+
+      // List<Engineer> model = _db.Engineers.OrderBy(x => x.EngineerName).ToList();
+      return View(userEngineers);
     }
     public ActionResult Create()
     {
       return View();
     }
+
     [HttpPost]
-    public ActionResult Create(Engineer Engineer)
+    public async Task<ActionResult> Create(Engineer engineer)
     {
-      _db.Engineers.Add(Engineer);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      engineer.User = currentUser; //"STAMP" USER ON THE OBJECT
+      _db.Engineers.Add(engineer);
+      // if (CategoryId != 0)
+      // {
+      //   _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+      // }
       _db.SaveChanges();
+
+
+      // _db.Engineers.Add(Engineer);
+      // _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     public ActionResult Details(int id)
     {
       Engineer model = _db.Engineers.FirstOrDefault(Engineer => Engineer.EngineerId == id);
