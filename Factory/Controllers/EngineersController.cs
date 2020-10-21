@@ -27,7 +27,7 @@ namespace Factory.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      var userEngineers = _db.Engineers.Where(entry => entry.User.Id == currentUser.Id);
+      List<Engineer> userEngineers = _db.Engineers.Where(entry => entry.User.Id == currentUser.Id).ToList();;
 
       // List<Engineer> model = _db.Engineers.OrderBy(x => x.EngineerName).ToList();
       return View(userEngineers);
