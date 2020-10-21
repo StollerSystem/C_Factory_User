@@ -4,21 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+// /new using directives
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Factory.Controllers
 {
+  [Authorize] 
   public class IncidentsController : Controller
   {
     private readonly FactoryContext _db;
-
-    public IncidentsController(FactoryContext db)
+    private readonly UserManager<ApplicationUser> _userManager; 
+    public IncidentsController(UserManager<ApplicationUser> userManager,FactoryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task <ActionResult> Index()
     {
-      List<Incident> model = _db.Incidents.ToList();
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+
+      List<Incident> model = _db.Incidents.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(model);
     }
 
@@ -28,8 +38,11 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Incident Incident, int EngineerId, int MachineId)
+    public async Task <ActionResult> Create(Incident Incident, int EngineerId, int MachineId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      Incident.User = currentUser;
       _db.Incidents.Add(Incident);
       _db.SaveChanges();
       return RedirectToAction("Index");

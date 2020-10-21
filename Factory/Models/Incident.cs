@@ -12,6 +12,7 @@ namespace Factory.Models
     public string IncidentTitle { get; set; }
     public string Description { get; set; } 
     public string IncidentDate { get; set; } 
+    public virtual ApplicationUser User { get; set; } 
     public virtual ICollection<IncidentJoin> IncidentJoin { get; set; }    
   }
 }
