@@ -13,6 +13,7 @@ namespace Factory.Models
     public string MachineName { get; set; }    
     public string MachineStatus { get; set; } 
     public string InspectionDate { get; set; } 
+    public virtual ApplicationUser User { get; set; } 
     public virtual ICollection<MachineEngineer> Engineers { get; set; }
     public virtual ICollection<IncidentJoin> Incidents { get; set; }
   }

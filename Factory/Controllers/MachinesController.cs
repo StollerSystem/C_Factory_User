@@ -5,19 +5,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
+// /new using directives
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Factory.Controllers
 {
+  [Authorize]
   public class MachinesController : Controller
   {
     private readonly FactoryContext _db;
-    public MachinesController(FactoryContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public MachinesController(UserManager<ApplicationUser> userManager,FactoryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
-    public ActionResult Index()
+    public async Task <ActionResult> Index()
     {
-      List<Machine> model = _db.Machines.OrderBy(x => x.MachineName).ToList();
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      List<Machine> model = _db.Machines.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(model);
     }
     public ActionResult Create()
@@ -25,8 +35,11 @@ namespace Factory.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Machine Machine)
+    public async Task<ActionResult> Create(Machine Machine)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      Machine.User = currentUser; 
       _db.Machines.Add(Machine);
       _db.SaveChanges();
       return RedirectToAction("Index");

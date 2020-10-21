@@ -27,7 +27,7 @@ namespace Factory.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      List<Engineer> userEngineers = _db.Engineers.Where(entry => entry.User.Id == currentUser.Id).ToList();;
+      List<Engineer> userEngineers = _db.Engineers.Where(entry => entry.User.Id == currentUser.Id).ToList();
 
       // List<Engineer> model = _db.Engineers.OrderBy(x => x.EngineerName).ToList();
       return View(userEngineers);
@@ -43,14 +43,8 @@ namespace Factory.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       engineer.User = currentUser; //"STAMP" USER ON THE OBJECT
-      _db.Engineers.Add(engineer);
-      // if (CategoryId != 0)
-      // {
-      //   _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
-      // }
+      _db.Engineers.Add(engineer);      
       _db.SaveChanges();
-
-
       // _db.Engineers.Add(Engineer);
       // _db.SaveChanges();
       return RedirectToAction("Index");

@@ -6,7 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
 
-namespace HairSalon.Controllers
+namespace Factory.Controllers
 {
   public class HomeController : Controller
   {
